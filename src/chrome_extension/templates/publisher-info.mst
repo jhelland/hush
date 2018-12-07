@@ -1,0 +1,80 @@
+
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="comment-filter__publishers info-panel__inner">
+    <p>Adjust the toxicity threshold slider to hide toxic comments from the following sources:</p>
+    <ul class="comment-filter__publishers-list">
+      {{#publishers}}
+      <li>
+        <a href="{{url}}" target="_blank">{{title}}</a>
+      </li>
+      {{/publishers}}
+      <hr>
+      <p>Input an example to see what the toxicity score is:</p>
+          <div class="card text-center bg-light">
+            <div class="card-body">  
+              <input class="card-title form-control" type="text" id="input" name="input" placeholder="Input sentence" onkeypress="return runEnterScript(event)"/>
+              <button class="card-text btn btn-outline-primary" id="btn">Predict Toxicity</button>
+              <class="item" id="api_output"><b>Toxicity:</b> [VALUE]</>
+              <div class="spinner" id="spinner" style="display: none">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+              </div>
+            </div>
+              <pre class="card-text api-pre" wrap="hard" style="padding-top: 0.2cm">  
+                <div class="item" id="api_input">[COMMENT]</div>
+              </pre>
+          </div>
+    </ul>
+  </div>
+</body>
+
+
+<!-- JavaScript to make API calls to localhost server and run animations. -->
+<script type="text/javascript">
+  function api_call(input) {
+    // hide button and make spinner appear
+    $('#btn').toggle();
+    $('#spinner').toggle();
+    $.ajax({
+      url: "http://localhost:5000/api",
+      method: 'POST',
+      contentType: 'application/json',
+      data: input, 
+      success: function( data, textStatus, jQxhr ) {
+        $('#btn').toggle();
+        $('#spinner').toggle();
+        $('#api_input').html( $("#input").val() );
+        $('#api_output').html( "<b>Toxicity:</b> " + data.score); // response JSON object has field "score", set in flask_rest_server.py
+        $("#input").val("");
+      },
+      error: function( jqXhr, textStatus, errorThrown ) {
+        $('#btn').toggle();
+        $('#spinner').toggle();
+        $('#api_input').html( "Sorry, the localhost:5000 server is inactive..." );
+        console.log( errorThrown );
+      },
+      timeout: 3000 // timeout set to 10 seconds
+    });
+  }
+  $( document ).ready(function() {
+    // make request when button is clicked
+    $('#btn').click(function() {
+      // get the input data
+      var input = $("#input").val();
+      api_call(input);
+      input = "";
+    });
+  });
+  function runEnterScript(e) {
+    if (e.keyCode == 13) {
+      var input = $("#input").val();
+      api_call(input);
+      input = "";
+    }
+  }
+</script>

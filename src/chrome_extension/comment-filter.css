@@ -1,0 +1,340 @@
+/**
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * CHANGES:
+ *
+ * Changed color scheme.
+ * Added blurring effect to thumbnails on 4chan.
+ */
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.comment-filter.info-panel {
+  color: #d4bce5; /*#289193;*/
+  font-family: 'Poppins';
+}
+
+.comment-filter .info-panel__header,
+.comment-filter .info-panel__description-wrapper {
+  background: #7b3ea5; /*#53ebd4;*/
+}
+
+.comment-filter .info-panel__controls a,
+.comment-filter .info-panel__controls a:visited {
+  color: #fff;
+  font-weight: 600;
+}
+
+.comment-filter .info-panel__title {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-top: 0;
+}
+
+.comment-filter .info-panel__subtitle {
+  color: #d4bce5; /*#289193;*/
+  font-size: 16px;
+}
+
+.comment-filter .info-panel__details {
+  border-top: none;
+}
+
+.comment-filter__control {
+  background: #7b3ea5; /*#53ebd4;*/
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-filter__publishers {
+  color: #7b3ea5; /*#289193;*/
+  font-size: 16px;
+}
+
+.comment-filter__publishers-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.comment-filter__publishers-list li {
+  line-height: 2rem;
+}
+
+.comment-filter__publishers-list a,
+.comment-filter__publishers-list a:visited {
+  border-bottom: 0;
+  color: #7b3ea5;  /*#289193;*/
+  font-size: 16px;
+}
+
+.comment-filter__publishers-list a:hover,
+.comment-filter__publishers-list a:active {
+  color: #222;
+}
+
+.comment-filter__comment {
+  font-weight: 300;
+}
+
+.comment-filter__comment-count {
+  display: block;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  margin: 0;
+  text-align: center;
+}
+
+.comment-filter__comments-hidden,
+.comment-filter__comments-total {
+  color: #fff;
+}
+
+.comment-filter__comment-count-label {
+  color: #d5a9f2;  /*#289193;*/
+  display: block;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.comment-filter__toxicity-range {
+  align-content: stretch;
+  color: #d5a9f2;  /*#289193;*/
+  font-weight: 600;
+  width: 75%;
+}
+
+.toxicity-range {
+  margin: 15px 0;
+}
+
+input[type=range] {
+  display: block;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  width: 95%;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #fff;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: #b27cd6; /*#32CBB8;*/
+  border-radius: 1px;
+  border: 0.2px solid #b27cd6; /*#32CBB8;*/
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff);
+}
+
+/* Toxic comment styles for blurring comments, various publishers */
+/*  4chan specific: postMessage 
+ *  Nextdoor specific: Linkify, classified-single-item-content-title, author-avatar-and-info
+ */
+.comment-filtered .toxic.toxic-hidden .fyre-comment,
+.comment-filtered .toxic.toxic-hidden > div > .comment-body,
+.comment-filtered .toxic.toxic-hidden div.gig-comment-body,
+.comment-filtered .toxic.toxic-hidden .postMessage,  /* 4chan */
+.comment-filtered .toxic.toxic-hidden .Linkify,  /* Nextdoor */
+.comment-filtered .toxic.toxic-hidden .classified-single-item-content-title,
+.comment-filtered .toxic.toxic-hidden .tweet-text { 
+  opacity: .6;
+  filter: blur(5px);
+}
+
+/* Toxic comment styles for blurring 4chan thumbnails.
+ * Also blurs images in toxic Nextdoor posts.  */
+.comment-filtered .toxic.toxic-hidden .fileThumb, 
+.comment-filtered .toxic.toxic-hidden .classified-single-item-photo-container {
+  opacity: .6;
+  filter: blur(20px);
+}
+
+.comment-filtered .toxic .fyre-comment,
+.comment-filtered .toxic > div > .comment-body,
+.comment-filtered .toxic div.gig-comment-body,
+.comment-filtered .toxic .postMessage, 
+.comment-filtered .toxic .Linkify {
+  padding: 10px 10px 5px !important;
+}
+
+.toxic-reveal {
+  display: none;
+}
+
+.toxic-hide {
+  display: block;
+}
+
+.toxic-hidden .toxic-reveal {
+  display: block;
+}
+
+.toxic-hidden .toxic-hide {
+  display: none;
+}
+
+.comment-filtered .toxic .toxic-message {
+  padding: 5px 10px;
+  display: block;
+  background: #d5a9f2; /*#98f3e5;*/
+  color: #7b3ea5 /*#289193*/ !important;
+}
+
+.toxic .toxic-message span {
+  color: inherit;
+  font-family: 'Poppins' !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.toxic .toxic-message:hover {
+  cursor: pointer;
+  color: #8c55b2 /*#289193*/ !important;
+  background: #f0c6ff; /*#53ebd4;*/
+}
+
+.toxic .toxic-message {
+  display: none;
+}
+
+
+
+/* TOXIC WEBFORM CSS */
+/*
+ * Stylings for the form box.
+ */
+
+.api-pre {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    font-family: 'Roboto';
+    src: url('chrome-extensions://__MSG_@@extension_id__/fonts/Roboto-Regular.ttf') format('truetype');
+    margin: 0 0 0px;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    color: #7b3ea5;  /* #333;*/
+    word-break: break-all;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0px;
+    overflow: auto;
+    padding-top: 0;  /*10px;/*
+    padding: 0;
+}
+
+/* Change the input box outline highlight color. */
+/* adapted from: https://stackoverflow.com/questions/14820952/change-bootstrap-input-focus-blue-glow */
+textarea:focus,
+input[type="text"]:focus,
+.uneditable-input:focus {
+  border-color: #a04adb;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #be77ef; /*rgba(126, 239, 104, 0.6);*/
+  outline: 0 none;
+}
+
+/* button hover colors */
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus,
+.btn.btn-outline-primary:active,
+.btn.btn-outline-primary.active {
+  color: #fff;
+  background-color: #7b3ea5;
+  border-color: #7b3ea5;
+}
+
+/* button colors */
+.btn.btn-outline-primary {
+  color: #7b3ea5;
+  background-color: transparent;
+  border-color: #7b3ea5;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}

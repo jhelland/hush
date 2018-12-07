@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+
+  "name": "Hush",
+  "description": "This extension demonstrates analyzing the toxicity of comments with custom localhost API",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Click to analyze comment toxicity"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.telegraph.co.uk/*",
+        "*://boards.4channel.org/*",
+        "*://boards.4chan.org/*",
+        "*://nextdoor.com/*",
+        "*://twitter.com/*"
+      ],
+      "css": [
+        "common.css",
+        "comment-filter.css"
+      ],
+      "js": [
+        "third_party/mustache.min.js",
+        "common.js",
+        "comment-filter.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "*://commentanalyzer.googleapis.com/",
+    "*://apis.google.com/",
+    "*://www.telegraph.co.uk/",
+    "*://boards.4channel.org/",
+    "*://boards.4chan.org/",
+    "*://nextdoor.com/",
+    "*://twitter.com/",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "*.svg",
+    "*.ttf",
+    "templates/*.mst"
+  ]
+}

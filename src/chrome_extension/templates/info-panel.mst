@@ -1,0 +1,72 @@
+<div id="info-panel" class="info-panel">
+  <div class="info-panel__header info-panel__inner">
+    <div class="info-panel__logo">
+      <h3 class="info-panel__title">{{title}}</h3>
+    </div>
+    <div class="info-panel__controls">
+      <a id="info-toggle" class="info-panel__details-toggle">
+        INFO
+        <img src="{{downArrow}}" class="info-panel__caret" />
+      </a>
+      <img src="{{dragArrow}}" id="info-panel__drag-arrow" class="info-panel__drag-arrow" />
+      <img src="{{closeIcon}}" class="info-panel__close-icon" />
+    </div>
+  </div>
+  <div class="info-panel__details">
+    {{#description}}
+    <div class="info-panel__description-wrapper info-panel__inner">
+      <p class="info-panel__subtitle">{{subtitle}}</p>
+      <p class="info-panel__description">{{description}}</p>
+    </div>
+    {{/description}}
+  </div>
+</div>
+
+
+// script to make info panel draggable
+<script>
+  //Make the DIV element draggagle:
+  dragElement(document.getElementById("info-panel"));
+
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "__drag-arrow")) {
+      /* if present, the header is where you move the DIV from:*/
+      document.getElementById(elmnt.id + "__drag-arrow").onmousedown = dragMouseDown;
+    } else {
+      /* otherwise, move the DIV from anywhere inside the DIV:*/
+      elmnt.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+      /* stop moving when mouse button is released:*/
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+</script>
+
