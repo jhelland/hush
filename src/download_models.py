@@ -5,6 +5,7 @@ Credit: https://stackoverflow.com/a/39225272
 """
 
 import requests
+import os
 
 
 def download_file_from_google_drive(id, destination):
@@ -47,6 +48,8 @@ if __name__ == "__main__":
     destinations = ["./data/models/tokenizer_raw_binary.pkl",
                     "./data/models/bi_gru_raw_binary_glove.h5",
                     "./data/models/bi_gru_raw_binary_fasttext.h5"]
+    if not os.path.exists("./data/models/"):
+        os.makedirs("./data/models/")
     for file_id, destination in zip(file_ids, destinations):
         download_file_from_google_drive(file_id, destination)
     print("...Models downloaded to \"./data/models/\"")
