@@ -15,7 +15,7 @@ This installation method will allow you to train your own models using the scrip
 - Either download the FastText and GloVe models yourself or use `bash download_embedding_models.sh`. 
 
 # USAGE
-Once you have completed the Minimal installation steps, navigate to a supported web page (currently: Twitter, Telegraph, 4chan, Nextdoor) and click the toxicity icon to the right of the URL bar. If the webpage is supported, hovering over the icon for a few seconds will display the text "Has access to this site". 
+Once you have completed the Minimal installation steps, `cd server_backend/` and run `python flask_rest_server.py`. Once you see the message "Happy filtering!", navigate in Chrome to a supported web page (currently: Twitter, Telegraph, 4chan, Nextdoor) and click the toxicity icon to the right of the URL bar. If the webpage is supported, hovering over the icon for a few seconds will display the text "Has access to this site". 
 
 Once the extension has detected comments, you can adjust the slider to your preference. If a toxic comment is detected, a blurred overlay will hid the comment. Click the comment to display it and click again to hide the comment.
 
