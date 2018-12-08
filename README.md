@@ -6,10 +6,18 @@ This installation method gets you up and running with the Flask-RESTful server b
 - (Optional) Create a virtual environment and activate it.
 - Install requirements via `pip install -r requirements_backend.txt`.
 - Download the trained models via `python download_models.py`.
-- Open Chrome and under "Extensions", enable developer mode and click "Load unpacked". Navigate to `src/` and load the folder `chrome_extension`. You shoulde see "Hush 1.0" now present as an unpacked extension. You can now exit developer mode if you wish.
-![](readme_images/chrome_devmode_on.png)
+- Open Chrome and under "Extensions", enable developer mode.
+
+  ![](readme_images/chrome_devmode_on.png)
+
+- Click "Load unpacked". 
+
 ![](readme_images/chrome_extensions.png)
+
+Navigate to `src/` and load the folder `chrome_extension`. You should see "Hush 1.0" now present as an unpacked extension. You can now exit developer mode if you wish.
+
 ![](readme_images/hush_loaded.png)
+
 - Refer to the USAGE section for further instructions.
 
 ### Training
