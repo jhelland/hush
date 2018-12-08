@@ -1,56 +1,26 @@
 """
-Script to download trained Keras models from Google Drive.
-
-Credit: https://stackoverflow.com/a/39225272
+Script to download trained Keras models from Dropbox.
 """
 
-import requests
-import os
 
+import urllib.request
 
-def download_file_from_google_drive(id, destination):
-    URL = "https://docs.google.com/uc?export=download"
+urls = ["https://www.dropbox.com/s/k4i5xjoxc20suo4/bi_gru_raw_binary_fasttext.h5?dl=1", # fasttext
+        "https://www.dropbox.com/s/it9bkjt4nbcktxr/bi_gru_raw_binary_glove.h5?dl=1", # glove
+        "https://www.dropbox.com/s/6le95jv70j30qwd/tokenizer_raw_binary.pkl?dl=1"] # tokenizer
+files = ["./data/models/bi_gru_raw_binary_fasttext.h5",
+         "./data/models/bi_gru_raw_binary_glove.h5",
+         "./data/models/tokenizer_raw_binary.pkl"]
 
-    session = requests.Session()
+print("...Downloading models")
+for url, fname in zip(urls, files):
+    u = urllib.request.urlopen(url)
+    data = u.read()
+    u.close()
 
-    response = session.get(URL, params = { "id" : id }, stream = True)
-    token = get_confirm_token(response)
+    with open(fname, "wb") as f:
+        f.write(data)
+    print("\twrote {:s}".format(fname))
+print("...Models downloaded to \"./data/models/\"")
+print("DONE\n")
 
-    if token:
-        params = { "id" : id, "confirm" : token }
-        response = session.get(URL, params = params, stream = True)
-
-    save_response_content(response, destination)
-
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith("download_warning"):
-            return value
-
-    return None
-
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk: # filter out keep-alive new chunks
-                f.write(chunk)
-
-
-if __name__ == "__main__":
-    print("...Downloading trained models")
-    file_ids = ["1KSR7nVi_BQZq8DMF83CZokm1zv70i0Td", # pickled tokenizer
-                "1BI_pQ80D0WOiMOzBuDZ2uv4TVymRJLJa", # hdf5 glove model
-                "177T41ZOGIm89mH3liu1dTQp9BRAW5Mcj"] # hdf5 fasttext model
-    destinations = ["./data/models/tokenizer_raw_binary.pkl",
-                    "./data/models/bi_gru_raw_binary_glove.h5",
-                    "./data/models/bi_gru_raw_binary_fasttext.h5"]
-    if not os.path.exists("./data/models/"):
-        os.makedirs("./data/models/")
-    for file_id, destination in zip(file_ids, destinations):
-        download_file_from_google_drive(file_id, destination)
-    print("...Models downloaded to \"./data/models/\"")
-    print("DONE\n")
