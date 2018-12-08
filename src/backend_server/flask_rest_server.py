@@ -3,6 +3,7 @@ from flask import Flask, render_template, flash, request, make_response, current
 from flask_cors import CORS
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from flask_restful import reqparse, abort, Api, Resource
+from flask_caching import Cache
 import numpy as np
 import pickle  # ew
 
@@ -17,18 +18,20 @@ import re
 # flask boilerplate
 DEBUG = True
 app = Flask(__name__)
+cache = Cache(app, config={"CACHE_TYPE": "simple"})
 CORS(app)  # allow cross-domain requests -- allow all by default
 api = Api(app)
 app.config.from_object(__name__)
 app.config["SECRET_KEY"] = "anything"
 
 
+# for form box queries
 class ReusableForm(Form):
     comment = TextField("Comment:", validators=[validators.required()])
 
 
 model_dir = "../data/models/"
-model_names = ["bi_gru_raw_binary_glove.h5", "bi_gru_raw_binary_fasttext.h5"] 
+model_names = ["bi_gru_raw_binary_glove.h5", "bi_gru_raw_binary_fasttext.h5"]
 print("\n\n\t...Loading models from {:s}".format(model_dir))
 models = []
 for model_name in model_names:
@@ -48,9 +51,10 @@ print("\tHappy filtering!\n\n")
 parser = reqparse.RequestParser()
 parser.add_argument("comment")
 
-graph = tf.get_default_graph()
+graph = tf.get_default_graph()  # for the sake of making model evaluations thread safe
 
 
+@cache.memoize(timeout=300)  # enable caching this function with 5min memory
 def get_prediction(comment):
     """
     Tokenizes comments using trained Keras tokenizer and then returns a toxicity score from trained Keras model.

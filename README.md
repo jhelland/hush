@@ -68,7 +68,6 @@ Click on "info ^" in the top right to display a drop-down menu with links to sup
 - [UI]: ability to reset panel position
 - [backend]: only make server query when a comment has changed
 - [backend]: Add more websites: youtube, reddit, facebook
-- [backend]: Cache already seen comments using flask cache.
 - [longterm]: Interactive learning -- users can provide feedback when type 1 & 2 errors occur, models should adapt.
   - Keep base models, add new adaptive models to committee with more weight in decision process?
 
