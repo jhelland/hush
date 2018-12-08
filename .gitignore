@@ -1,4 +1,3 @@
-
 .gitignore
 .DS_Store
 *.csv
@@ -8,3 +7,11 @@
 checkpoints/
 .ipynb_checkpoints/
 data/
+
+src/model_training/.ipynb_checkpoints
+src/model_training/.DS_store
+src/utils/.DS_store
+src/utils/.ipynb_checkpoints
+src/utils/__pycache__
+src/backend_server/.ipynb_checkpoints
+
