@@ -182,18 +182,32 @@ input[type="text"]:focus,
   outline: 0 none;
 }
 
+.hush-btn {
+  background-repeat: no-repeat;
+  border: 1px solid #e6ecf0;
+  border-radius: 4px;
+  color: #66757f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  padding: 8px 16px;
+  position: relative;  
+}
+
 /* button hover colors */
-.btn.btn-outline-primary:hover,
-.btn.btn-outline-primary:focus,
-.btn.btn-outline-primary:active,
-.btn.btn-outline-primary.active {
+.hush-btn.hush-btn-outline-primary:hover,
+.hush-btn.hush-btn-outline-primary:focus,
+.hush-btn.hush-btn-outline-primary:active,
+.hush-btn.hush-btn-outline-primary.active {
   color: #fff;
   background-color: #7b3ea5;
   border-color: #7b3ea5;
 }
 
 /* button colors */
-.btn.btn-outline-primary {
+.hush-btn.hush-btn-outline-primary {
   color: #7b3ea5;
   background-color: transparent;
   border-color: #7b3ea5;

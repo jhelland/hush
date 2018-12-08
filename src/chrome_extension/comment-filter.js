@@ -78,7 +78,7 @@ const CommentFilter = class {
         chrome.runtime.getURL(commentFilterTemplate.PUBLISHER_INFO);
     const publishers = [
       { 'title': 'telegraph.co.uk', 'url': 'https://www.telegraph.co.uk' },
-      { 'title': '4chan.org', 'url': 'https://www.boards.4channel.org' },
+      { 'title': '4chan.org', 'url': 'https://www.4chan.org' },
       { 'title': 'nextdoor.com', 'url': 'https://nextdoor.com' },
       { 'title': 'twitter.com', 'url': 'https://twitter.com' },
     ];

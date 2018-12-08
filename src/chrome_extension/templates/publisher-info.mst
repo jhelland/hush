@@ -2,6 +2,59 @@
 <html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style type="text/css">
+    .card-title.form-control {
+      font-family: 'Roboto';
+      src: url('chrome-extensions://__MSG_@@extension_id__/fonts/Roboto-Regular.ttf') format('truetype');
+      display: inline-block;
+      width: 210px;
+      padding: 4px;
+      margin: 0;
+      outline: 0;
+      background-color: #fff;
+      border: 1px solid #e6ecf0;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .hush-btn {
+      background-repeat: no-repeat;
+      border: 1px solid #e6ecf0;
+      border-radius: 2px;
+      color: #66757f;
+      cursor: pointer;
+      display: inline-block;
+      font-family: 'Roboto';
+      src: url('chrome-extensions://__MSG_@@extension_id__/fonts/Roboto-Regular.ttf') format('truetype');
+      font-size: 14px;
+      font-weight: bold;
+      line-height: normal;
+      padding: 4px 12px;
+      position: relative;
+    }
+
+    /* button hover colors */
+    .hush-btn.hush-btn-outline-primary:hover,
+    .hush-btn.hush-btn-outline-primary:focus,
+    .hush-btn.hush-btn-outline-primary:active,
+    .hush-btn.hush-btn-outline-primary.active {
+      color: #fff;
+      background-color: #7b3ea5;
+      border-color: #7b3ea5;
+    }
+
+    /* button colors */
+    .hush-btn.hush-btn-outline-primary {
+      color: #7b3ea5;
+      background-color: transparent;
+      border-color: #7b3ea5;
+    }
+
+    /* link highlighting */
+    .info-panel__links a:hover {
+      color: red; 
+    }
+  </style>
 </head>
 
 <body>
@@ -10,7 +63,7 @@
     <ul class="comment-filter__publishers-list">
       {{#publishers}}
       <li>
-        <a href="{{url}}" target="_blank">{{title}}</a>
+        <a class="info-panel__links" href="{{url}}" target="_blank">{{title}}</a>
       </li>
       {{/publishers}}
       <hr>
@@ -18,7 +71,7 @@
           <div class="card text-center bg-light">
             <div class="card-body">  
               <input class="card-title form-control" type="text" id="input" name="input" placeholder="Input sentence" onkeypress="return runEnterScript(event)"/>
-              <button class="card-text btn btn-outline-primary" id="btn">Predict Toxicity</button>
+              <button class="hush-btn hush-btn-outline-primary" id="btn">Predict</button>
               <class="item" id="api_output"><b>Toxicity:</b> [VALUE]</>
               <div class="spinner" id="spinner" style="display: none">
                 <div class="double-bounce1"></div>

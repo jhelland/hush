@@ -3,9 +3,13 @@
 ### Minimal
 This installation method gets you up and running with the Flask-RESTful server backend and the Chrome extension. If you want to train your own models, follow the Training installation method.
 - Clone the repository and then `cd` into `src/`.
+- (Optional) Create a virtual environment and activate it.
 - Install requirements via `pip install -r requirements_backend.txt`.
 - Download the trained models via `python download_models.py`.
 - Open Chrome and under "Extensions", enable developer mode and click "Load unpacked". Navigate to `src/` and load the folder `chrome_extension`. You shoulde see "Hush 1.0" now present as an unpacked extension. You can now exit developer mode if you wish.
+![](readme_images/chrome_devmode_on.png)
+![](readme_images/chrome_extensions.png)
+![](readme_images/hush_loaded.png)
 - Refer to the USAGE section for further instructions.
 
 ### Training
@@ -28,7 +32,7 @@ Click on "info ^" in the top right to display a drop-down menu with links to sup
 ---
 # TODO
 ### CURRENT BUGS
-- Somehow different styling is applied to info panel on each website. Ex: on twitter, form box thinks server is inactive. Might be issue with mustache template publisher-info.mst.
+- On Twitter, form box queries result in a server unresponsive message regardless of server state.
 - Sometimes extension button has to be clicked twice to actually load. Should be problem with how tab events are being handled in background.js.
 - Twitter sluggish af. Probably need to decrease number of queries.
 
@@ -39,6 +43,7 @@ Click on "info ^" in the top right to display a drop-down menu with links to sup
 - [UI]: ability to reset panel position
 - [backend]: only make server query when a comment has changed
 - [backend]: Add more websites: youtube, reddit, facebook
+- [backend]: Cache already seen comments using flask cache.
 - [longterm]: Interactive learning -- users can provide feedback when type 1 & 2 errors occur, models should adapt.
   - Keep base models, add new adaptive models to committee with more weight in decision process?
 
