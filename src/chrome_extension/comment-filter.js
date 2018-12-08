@@ -59,7 +59,7 @@ const CommentFilterClass = {
 const CommentFilter = class {
   constructor() {
     /** @type {number} The maximum toxicity to tolerate. */
-    this.toxicityThreshold = .1;
+    this.toxicityThreshold = .5;
     /** @type {Element} The toxicity range slider, to be defined on setup. */
     this.toxicityRangeElement;
     /**

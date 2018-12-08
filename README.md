@@ -2,21 +2,24 @@
 # INSTALLATION
 ### Minimal
 This installation method gets you up and running with the Flask-RESTful server backend and the Chrome extension. If you want to train your own models, follow the Training installation method.
+
 - Clone the repository and then `cd` into `src/`.
 - (Optional) Create a virtual environment and activate it.
 - Install requirements via `pip install -r requirements_backend.txt`.
 - Download the trained models via `python download_models.py`.
 - Open Chrome and under "Extensions", enable developer mode.
 
-  ![](readme_images/chrome_devmode_on.png =250px)
+  <center><img src="./readme_images/chrome_devmode_on.png" width="150"/></center>
 
 - Click "Load unpacked". 
 
-  ![](readme_images/chrome_extensions.png =250px)
+  <center><img src="./readme_images/chrome_extensions.png" width="350"/></center>
 
-  Navigate to `src/` and load the folder `chrome_extension`. You should see "Hush 1.0" now present as an unpacked extension. You can now exit developer mode if you wish.
+  Navigate to `src/` and load the folder `chrome_extension`. You should see "Hush 1.0" now present as an unpacked extension.
 
-  ![](readme_images/hush_loaded.png =250px)
+  <center><img src="./readme_images/hush_loaded.png" width="400"/></center>
+  
+  You can now exit developer mode if you wish.
 
 - Refer to the USAGE section for further instructions.
 
@@ -27,15 +30,29 @@ This installation method will allow you to train your own models using the scrip
 - Either download the FastText and GloVe models yourself or use `bash download_embedding_models.sh`. 
 
 # USAGE
-Once you have completed the Minimal installation steps, `cd server_backend/` and run `python flask_rest_server.py`. Once you see the message "Happy filtering!", navigate in Chrome to a supported web page (currently: Twitter, Telegraph, 4chan, Nextdoor) and click the toxicity icon to the right of the URL bar. If the webpage is supported, hovering over the icon for a few seconds will display the text "Has access to this site". 
+Once you have completed the Minimal installation steps, `cd server_backend/` and run `python flask_rest_server.py`. You should see the message "Happy filtering!"
 
-Once the extension has detected comments, you can adjust the slider to your preference. If a toxic comment is detected, a blurred overlay will hid the comment. Click the comment to display it and click again to hide the comment.
+<center><img src="./readme_images/happy_filtering.png" width="350"/></center>
 
-You can display all comments by either clicking the "X" symbol in the top right of the panel or by clicking the toxicity icon. Click the toxicity icon again to reactivate the filter.
+Navigate in Chrome to a supported web page (currently: Twitter, Telegraph, 4chan, Nextdoor) and click the toxicity icon to the right of the URL bar. If the webpage is supported, hovering over the icon for a few seconds will display the text "Has access to this site". 
 
-You can move the displayed panel by clicking and dragging the "+" symbol in the top right.
+<center><img src="./readme_images/has_access.png" width="250"/></center>
+
+Once the extension has detected comments, you can adjust the slider to your preference.
+
+<center><img src="./readme_images/hush_slider.gif" width="450"/></center>
+
+If a toxic comment is detected, a blurred overlay will hid the comment. Click the comment to display it and click again to hide the comment.
+
+<center><img src="./readme_images/filtered_comment.png" width="400"/></center>
+
+You can display all comments by either clicking the "X" symbol in the top right of the panel or by clicking the toxicity icon. Click the toxicity icon again to reactivate the filter. You can move the displayed panel by clicking and dragging the "+" symbol in the top right.
+
+<center><img src="./readme_images/hush_move.gif" width="450"/></center>
 
 Click on "info ^" in the top right to display a drop-down menu with links to supported websites as well as a query form. Type in a comment into the form box and click the "Predict Toxicity" button to receive a toxicity rating for your input. Click the "info" button in the top right again to hide the menu.
+
+<center><img src="./readme_images/hush_dropdown.gif" width="450"/></center>
 
 ---
 # TODO
