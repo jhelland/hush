@@ -197,6 +197,14 @@ const CommentSelectors = {
     'COMMENT_CONTENT': 'tweet-text',
     'NEW_COMMENT_MUTATION': 'tweet-text',
   },
+  'www.facebook.com': {
+    'ID': '#content_container',
+    'COMMENTS_CONTAINER': '.UFIContainer',
+    'COMMENT_WRAPPER': 'UFIComment',
+    'COMMENT_CONTENT_CONTAINTER': 'UFICommentContent',
+    'COMMENT_CONTENT': 'UFICommentBody',
+    'NEW_COMMENT_MUTATION': 'globalContainer',
+  },
   /*'reddit.com': {
     'ID': 'sogqxs-0 jlPabA',
     'COMMENTS_CONTAINER': 'Comment t1_eb2qbwz',

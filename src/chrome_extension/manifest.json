@@ -19,7 +19,8 @@
         "*://boards.4channel.org/*",
         "*://boards.4chan.org/*",
         "*://nextdoor.com/*",
-        "*://twitter.com/*"
+        "*://twitter.com/*",
+        "*://www.facebook.com/*"
       ],
       "css": [
         "common.css",
@@ -42,6 +43,7 @@
     "*://boards.4chan.org/",
     "*://nextdoor.com/",
     "*://twitter.com/",
+    "*://www.facebook.com/",
     "webRequest"
   ],
   "web_accessible_resources": [

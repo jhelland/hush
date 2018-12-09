@@ -81,6 +81,7 @@ const CommentFilter = class {
       { 'title': '4chan.org', 'url': 'https://www.4chan.org' },
       { 'title': 'nextdoor.com', 'url': 'https://nextdoor.com' },
       { 'title': 'twitter.com', 'url': 'https://twitter.com' },
+      { 'title': 'facebook.com', 'url': 'https://www.facebook.com' },
     ];
     const infoPanelParams = { publishers: publishers };
     let infoPanelDetails =

@@ -174,30 +174,35 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 /*  4chan specific: postMessage 
  *  Nextdoor specific: Linkify, classified-single-item-content-title, author-avatar-and-info
  */
-.comment-filtered .toxic.toxic-hidden .fyre-comment,
+.comment-filtered .toxic.toxic-hidden .fyre-comment,                            /* telegraph */
 .comment-filtered .toxic.toxic-hidden > div > .comment-body,
 .comment-filtered .toxic.toxic-hidden div.gig-comment-body,
-.comment-filtered .toxic.toxic-hidden .postMessage,  /* 4chan */
-.comment-filtered .toxic.toxic-hidden .Linkify,  /* Nextdoor */
+.comment-filtered .toxic.toxic-hidden .postMessage,                             /* 4chan */
+.comment-filtered .toxic.toxic-hidden .Linkify,                                 /* Nextdoor */
 .comment-filtered .toxic.toxic-hidden .classified-single-item-content-title,
-.comment-filtered .toxic.toxic-hidden .tweet-text { 
+.comment-filtered .toxic.toxic-hidden .tweet-text,                              /* twitter */
+.comment-filtered .toxic.toxic-hidden .UFICommentBody                           /* facebook */ 
+{ 
   opacity: .6;
   filter: blur(5px);
 }
 
-/* Toxic comment styles for blurring 4chan thumbnails.
- * Also blurs images in toxic Nextdoor posts.  */
-.comment-filtered .toxic.toxic-hidden .fileThumb, 
-.comment-filtered .toxic.toxic-hidden .classified-single-item-photo-container {
+/* Toxic comment styles for blurring images associated with comments. */
+.comment-filtered .toxic.toxic-hidden .fileThumb,                              /* 4chan images */
+.comment-filtered .toxic.toxic-hidden .classified-single-item-photo-container, /* nextdoor images */ 
+.comment-filtered .toxic.toxic-hidden .img                                     /* facebook user thumbnails */ 
+{
   opacity: .6;
   filter: blur(20px);
 }
 
-.comment-filtered .toxic .fyre-comment,
+.comment-filtered .toxic .fyre-comment,         /* telegraph */
 .comment-filtered .toxic > div > .comment-body,
 .comment-filtered .toxic div.gig-comment-body,
-.comment-filtered .toxic .postMessage, 
-.comment-filtered .toxic .Linkify {
+.comment-filtered .toxic .postMessage,          /* 4chan */
+.comment-filtered .toxic .Linkify,              /* nextdoor */
+.comment-filtered .toxic .UFICommentBody        /* facebook */ 
+{
   padding: 10px 10px 5px !important;
 }
 

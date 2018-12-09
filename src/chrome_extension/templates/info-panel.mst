@@ -23,7 +23,7 @@
 </div>
 
 
-// script to make info panel draggable
+<!--script to make info panel draggable-->
 <script>
   //Make the DIV element draggagle:
   dragElement(document.getElementById("info-panel"));
